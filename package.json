@@ -11,6 +11,8 @@
     "debug": "*",
     "ejs": "*",
     "mysql":"*",
-    "body-parser":"*"
+    "body-parser":"*",
+    "formidable":"*",
+    "fs":"*"
   }
 }

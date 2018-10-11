@@ -7,7 +7,7 @@ var express = require('express'),
 
 
 var app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false ,uploadDir:'./uploads'}));
 
 // view engine setup
 app.set('view engine', 'ejs');
@@ -18,6 +18,10 @@ var notImplemented=function(req,res){
 
 
 var userControl=require('./controllers/userController');
-app.get("/newStudent",userControl.newUser)
-app.post("/newStudent",userControl.createUser)
+app.get("/newStudent",userControl.newUser);
+app.get("/",userControl.loginForm);
+app.post("/newStudent",userControl.createUser);
+app.post("/",userControl.loggedIn);
+app.get("/uploadFile",userControl.fileUploadForm);
+app.post("/uploadFile",userControl.fileUpload);
 app.listen(8080);
