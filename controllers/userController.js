@@ -17,6 +17,9 @@ module.exports={
         res.send(req.body.name+" is added");
     },
     loginForm:function(req,res,next){
+        if(req.session&&req.session.userId)
+        res.send(req.session.userId+ " is logged in");
+        else
         res.sendFile('/home/joyce/Projects/ktuapp/static/login.html');
     },
     loggedIn:function(req,res,next){
@@ -27,13 +30,29 @@ module.exports={
           //  if (err) throw err;
             console.log(result);
             if(result[0].Password==req.body.password)
-            res.send("You are logged in");
+            {
+                req.session.userId=req.body.name;
+                res.redirect("/");
+            }
             else
             res.send("Wrong password");}
             else
             res.send("No user exists");
           });
           
+    },
+    logout:function(req,res,next){
+        if(req.session&&req.session.userId){console.log(req.session.userId);
+            req.session.destroy(function(err){
+                if(err) return next(err);
+                else{
+                    res.redirect("/");
+                }
+            })
+        }
+        else{
+            res.send("Already logged out");
+        }
     },
     fileUploadForm:function(req,res,next){
         res.sendFile('/home/joyce/Projects/ktuapp/static/fileUpload.html');
