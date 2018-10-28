@@ -20,10 +20,11 @@ module.exports={
         if(req.session&&req.session.userId)
         res.send(req.session.userId+ " is logged in");
         else
-        res.sendFile('/home/joyce/Projects/ktuapp/static/login.html');
+        res.render('login');
     },
     loggedIn:function(req,res,next){
         var findpass="SELECT Password FROM user WHERE Name='"+req.body.name+"';";
+        console.log(req.body.name);
         db.query(findpass, function (err, result) {
             if(result.length!=0)
             {
@@ -32,7 +33,7 @@ module.exports={
             if(result[0].Password==req.body.password)
             {
                 req.session.userId=req.body.name;
-                res.redirect("/");
+                res.render("studentview",{name:req.body.name});
             }
             else
             res.send("Wrong password");}
@@ -53,20 +54,5 @@ module.exports={
         else{
             res.send("Already logged out");
         }
-    },
-    fileUploadForm:function(req,res,next){
-        res.sendFile('/home/joyce/Projects/ktuapp/static/fileUpload.html');
-    },
-    fileUpload:function(req,res,next){
-        var form = new formidable.IncomingForm();
-    form.parse(req, function (err, fields, files) {
-        var oldpath = files.filetoupload.path;
-        var newpath = '/home/joyce/Projects/UploadedFromForm/' + files.filetoupload.name;
-        fs.copyFile(oldpath, newpath, function (err) {
-          if (err) throw err;
-          res.send("File Uploaded");
-    });
-    });
-}
-
+    }
 }
