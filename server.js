@@ -46,7 +46,7 @@ app.get("/teacherview",teachControl.teacherLoggedin);
 app.post("/teacherview",teachControl.teacherLoggedin);
 app.get("/uploadFile/:courseID/:batch",teachControl.fileUploadForm);
 app.post("/uploadFile", upload.single('filetoupload'),teachControl.fileUpload);
-app.get("/editMark/:courseID/:batch",teachControl.editMark)
-
+app.get("/editMark/:courseID/:batch",teachControl.editMark);
+app.post("/editMark/:courseID/:batch",teachControl.submitEditMark);
 
 app.listen(8080);

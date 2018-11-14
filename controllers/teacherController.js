@@ -85,13 +85,22 @@ module.exports={
     });
       
     },
+    submitEditMark:function(req,res,next){
+      var insertstu="UPDATE Enrollment SET Series_1="+req.body.Series1+",Series_2="+req.body.Series2+",Assignment="+req.body.Assignment+",Attendance="+req.body.Attendence+" where student='"+req.body.Student+"' and CourseID='"+req.params.courseID+"';";           //TODO
+      console.log(insertstu);
+      db.query(insertstu, function (err, result) {
+        if (err) throw err;
+        console.log("1 record inserted");
+        res.redirect(req.url)
+    });
+    },
    
     editMark:function(req,res,next){
-      var selctstat="SELECT * FROM testjoyce;";                                                       //TODO
-      db.query(selctstat, function (err, result,fields) {
+      var selctstat="SELECT * FROM Enrollment WHERE CourseID='"+req.params.courseID+"';";                                                       //TODO
+      db.query(selctstat, function (err, result) {
         if (err) throw err;
-        console.log(fields);
-        res.render('teachertable',{enrollmentfield:fields,data:result});                                                              //TODO
+        console.log(result);
+        res.render('teachertable',{data:result});                                                              //TODO
     }); 
     }
     
