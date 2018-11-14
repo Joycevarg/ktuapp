@@ -4,7 +4,6 @@ fs=require("fs"),
 csvParser=require('csv-parse');
 
 
-
 module.exports={
 
     teacherLogin:function(req,res){
@@ -12,7 +11,6 @@ module.exports={
         res.render("Teacherlogin");
         else{
             var getcourse='SELECT CourseID,Batch FROM Teaching WHERE Teacher="'+req.session.ID+'";';
-            console.log(getcourse);
             db.query(getcourse, function (err, result) {
                console.log(result);
                res.render("teacherview",{teaching:result,message:"Welcome back "+req.session.ID});
@@ -21,7 +19,6 @@ module.exports={
     },
     teacherLoggedin:function(req,res){
         var findpass="SELECT Password FROM Teacher WHERE UserName='"+req.body.name+"';";
-        console.log(req.body.name);
         db.query(findpass, function (err, result) {
             if(result.length!=0)
             {
@@ -44,13 +41,8 @@ module.exports={
     },
     
     fileUpload:function(req,res,next){
-        var form = new formidable.IncomingForm();
-    form.parse(req, function (err, fields, files) {
-        var oldpath = files.filetoupload.path;
-        var newpath = '/home/joyce/Projects/ktuapp/uploads/' + files.filetoupload.name;
-        fs.copyFile(oldpath, newpath, function (err) {
-          if (err) throw err;
-          fs.readFile(newpath, {
+        
+          fs.readFile(req.file.path, {
             encoding: 'utf-8'
           }, function(err, csvData) {
             if (err) {
@@ -66,7 +58,8 @@ module.exports={
                 console.log(data);
                 var i;
                 for(i=1;i<data.length;i++){
-                    var insertstu="INSERT INTO Enrollment VALUES('"+data[i][0]+"','"+data[i][1]+"','"+data[i][2]+"');";
+                    var insertstu="UPDATE Enrollment SET " +req.body.exam + "='"+data[i][1]+"' where student='"+data[i][0]+"' and CourseID='"+req.body.courseID+"';";           //TODO
+                    console.log(insertstu);
                     db.query(insertstu, function (err, result) {
                       if (err) throw err;
                       console.log("1 record inserted");
@@ -77,11 +70,29 @@ module.exports={
 
 
           res.render("teacherview",{message:"File Uploaded",teaching:[]});
-    });
-    });
+    
     },
     fileUploadForm:function(req,res,next){
-        res.render('fileUpload');
+      console.log(req.params);
+        res.render('markupload',{batch:req.params.batch,courseID:req.params.courseID});
+    },
+    markChange:function(req,res,next){
+      var selctstat="UPDATE Enrollment SET ___ ='"+mark+"' WHERE student='"+roll_no+"';";          //TODO                                                       //TODO
+      db.query(selctstat, function (err, result) {
+        if (err) throw err;
+        console.log(result);
+        res.render('changemark',{classes:[],subjects:[],rollno:1});                                       //TODO
+    });
+      
+    },
+   
+    editMark:function(req,res,next){
+      var selctstat="SELECT * FROM testjoyce;";                                                       //TODO
+      db.query(selctstat, function (err, result,fields) {
+        if (err) throw err;
+        console.log(fields);
+        res.render('teachertable',{enrollmentfield:fields,data:result});                                                              //TODO
+    }); 
     }
-
+    
 }

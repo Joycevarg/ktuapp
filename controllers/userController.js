@@ -33,14 +33,28 @@ module.exports={
             if(result[0].Password==req.body.password)
             {
                 req.session.userId=req.body.name;
-                res.render("studentview",{name:req.body.name});
-            }
+
+                
+                var selectstat="SELECT subjects";                                                           //TODO
+                db.query(selectstat, function (err, subjects) {
+                if (err) throw err;
+                    console.log(subjects);
+                    res.render("studentview",{name:req.body.name,subjects:subjects});
+            });}
             else
             res.send("Wrong password");}
             else
             res.send("No user exists");
           });
-          
+    },
+    markview:function(req,res){
+        var selectstat="SELECT Series_1, Series_2, Assignment, Attendance FROM Enrollment WHERE student='"+rollno+"'";                                                           //TODO
+                db.query(selectstat, function (err, marks) {
+                if (err) throw err;
+                    console.log(marks);
+                    res.render("marks",{marks:marks});
+            });
+       
     },
     logout:function(req,res,next){
         if(req.session&&req.session.userId){console.log(req.session.userId);

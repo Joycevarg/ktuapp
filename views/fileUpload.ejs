@@ -1,4 +1,12 @@
-<form action="uploadFile" method="post" enctype="multipart/form-data">
+<form action="/uploadFile" method="post" enctype="multipart/form-data">
     <label for="filetoupload">Select file:</label><input type="file" name="filetoupload"><br>
+    <select name="exam">
+        <option value="Series_1">Series 1</option>
+        <option value="Series_2">Series 2</option>
+        <option value="Assignment">Assignment</option>
+        <option value="Attendence">Attendence</option>
+      </select>
+    <input type="hidden" name="batch" value="<%= batch %>">
+    <input type="hidden" name="courseID" value="<%= courseID %>">
     <input type="submit">
     </form>

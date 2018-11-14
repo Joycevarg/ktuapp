@@ -27,10 +27,11 @@
     <!-- Page styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.min.css">
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script> 
     <style>
+      
     #view-source {
       position: fixed;
       display: block;
@@ -40,6 +41,26 @@
       margin-bottom: 40px;
       z-index: 900;
     }
+
+    table {
+    font-family: arial, sans-serif;
+    font-size: 17px;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+
+.show {display: block;}
     </style>
   </head>
 
@@ -77,43 +98,44 @@
           
         </span>
         <nav class="mdl-navigation">
-          
-          <a class="mdl-navigation__link" href="">Result</a>
+          <a class="mdl-navigation__link" href="">Home</a>
+          <a class="mdl-navigation__link" href="">Upload marks</a>
           <a class="mdl-navigation__link" href="">Logout</a>
           
           
         </nav>
       </div>
 
-      
-    </div>
+      <div class="android-content mdl-layout__content">
+        <a name="top"></a>
 
 
-    <div class="register-page">
-      <div class="form">
-        <form class="login-form">
-         
           
-          <p class="message" style="font-size:27px"> <%= message %></a></p>
-          
-        </form>
-        
-        
-        
-      </div>
-    </div>
+    
+          <div class="ttable">
 
-
-    <div class="ba">
-   
-
-      <% teaching.forEach(function(tClass){ %>
-        <a href=<%="/editMark/" + tClass.CourseID +"/"+tClass.Batch %> class="button"><%=tClass.CourseID+" "+tClass.Batch%></a> 
-        <% }); %>
-      
-
-      </div>
-      
+              
+            <table>
+                <tr>
+                  <% enrollmentdata.forEach(function(heading){ %>
+                     <th>   <%=heading.name %>            </th>
+                    <% }); %>
+                </tr>
+                <tr> <td contenteditable='true'></td>
+                    <td contenteditable='true'></td>
+                    <td contenteditable='true'></td>
+                    <td contenteditable='true'></td>
+                </tr>
+                <tr> <td contenteditable='true'></td>
+                  <td contenteditable='true'></td>
+                  <td contenteditable='true'></td>
+                  <td contenteditable='true'></td>
+              </tr>
+              </table>
+              <button type="submit">Save</button>
+        </div>
+       
+      </body>
     
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
   </body>

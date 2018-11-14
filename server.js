@@ -4,19 +4,31 @@ var express = require('express'),
  logger = require('morgan'),
  cookieParser = require('cookie-parser'),
 session = require("express-session"),
- bodyParser = require('body-parser');
+ bodyParser = require('body-parser'),
+ multer=require('multer'),
+ storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'uploads/')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname)
+    }
+  }),
+ upload=multer({ dest: 'uploads/',storage: storage })
+
 
 
 var app = express();
+app.use(express.static(__dirname+'/static'));
 app.use(bodyParser.urlencoded({ extended: false ,uploadDir:'./uploads'}));
 app.use(session({resave: true, saveUninitialized: true, secret: 'SOMERANDOMSECRETHERE', cookie: { maxAge: 200000 }}));
+
 // view engine setup
 app.set('view engine', 'ejs');
 var notImplemented=function(req,res){
     res.sendStatus(404);
 };
 
-app.use(express.static(__dirname+'/static'));
 
 var userControl=require('./controllers/userController');
 var teachControl=require('./controllers/teacherController');
@@ -29,11 +41,12 @@ app.post("/",userControl.loggedIn);
 app.get("/logout",userControl.logout);
 
 
+app.get("/teacherLogin",teachControl.teacherLogin);
 app.get("/teacherview",teachControl.teacherLoggedin);
 app.post("/teacherview",teachControl.teacherLoggedin);
-app.get("/uploadFile",teachControl.fileUploadForm);
-app.post("/uploadFile",teachControl.fileUpload);
-app.get("/teacherLogin",teachControl.teacherLogin);
+app.get("/uploadFile/:courseID/:batch",teachControl.fileUploadForm);
+app.post("/uploadFile", upload.single('filetoupload'),teachControl.fileUpload);
+app.get("/editMark/:courseID/:batch",teachControl.editMark)
 
 
 app.listen(8080);
