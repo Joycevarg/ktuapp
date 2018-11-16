@@ -104,11 +104,13 @@
     </div>
 
 
-    <div class="ba">
+    <div class="register-page2">
    
 
       <% teaching.forEach(function(tClass){ %>
-        <a href=<%="/editMark/" + tClass.CourseID +"/"+tClass.Batch %> class="button"><%=tClass.CourseID+" "+tClass.Batch%></a> 
+        <a href=<%="/editMark/" + tClass.CourseID +"/"+tClass.Batch %> class="button">Edit <%=tClass.CourseID+" "+tClass.Batch%></a> 
+        
+        <a href=<%="/uploadFile/" + tClass.CourseID +"/"+tClass.Batch %> class="button2">Upload <%=tClass.CourseID+" "+tClass.Batch%></a> 
         <% }); %>
       
 

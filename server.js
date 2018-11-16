@@ -34,10 +34,9 @@ var userControl=require('./controllers/userController');
 var teachControl=require('./controllers/teacherController');
 
 
-app.get("/newStudent",userControl.newUser);
 app.get("/",userControl.loginForm);
-app.post("/newStudent",userControl.createUser);
 app.post("/",userControl.loggedIn);
+app.get("/viewmark",userControl.markview);
 app.get("/logout",userControl.logout);
 
 

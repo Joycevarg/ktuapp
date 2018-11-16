@@ -165,58 +165,19 @@ tr:nth-child(even) {
                   <th>Subject</th>
                   <th>Series1</th>
                   <th>Series2</th>
-                  <th>Attendence</th>
-                  <th>University</th>
+                  <th>Assignment</th>
+                  <th>Attendance</th>
                   <th>CGPA</th>
                 </tr>
-                <tr> <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                 
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
+                <% marks.forEach(function(student){ %>
+                  <tr>
+                    <td ><%=student.CourseID%></td>
+                    <td ><%=student.Series_1%></td>
+                    <td ><%=student.Series_2%></td>
+                    <td ><%=student.Assignment%></td>
+                    <td ><%=student.Attendance%></td>
+                  </tr>
+                  <% }); %>
               </table>
         </div>
        

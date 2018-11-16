@@ -22,6 +22,37 @@
 
 
 }
+.register-page2 {
+  
+  background: white;
+  width: 360px;
+  min-height: 100px;
+  overflow: hidden;
+  padding: 2% 2% 2%;
+
+  position: sticky;
+  top:50%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  text-align: center;
+
+  margin: auto;
+
+
+
+}
+.teacherview{
+    width: 360px;
+    padding: 8% 0 0;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
 .head {
 
   color: #6a0303;
@@ -87,7 +118,7 @@
   cursor: pointer;
 }
 .form button:hover,.form button:active,.form button:focus {
-  background: #43A047;
+  background: #ae9e8e;
 }
 .form .message {
   margin: 15px 0 0;
@@ -105,7 +136,20 @@
 }
 
 
+.edit{
+background: transparent;
 
+}
+.ba{  display: inline-block;
+    width: 200px;
+    position: relative;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin: auto;
+}
 
 .container {
   position: relative;
@@ -166,22 +210,27 @@ body {
 .container {
   padding: 2px 16px;
 }
-.ba {
-  align-items:center;
-  position: absolute;
-    height: 200px;
-    width: 200px;
-    margin: -100px 0 0 -200px;
-    top: 80%;
-    left:59%;
-    
-}
+
 .button {
   
   background-color: #ae9e8e;
   border: none;
   color: white;
-  padding: 15px 32px;
+  padding: 15px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.button2 {
+  
+  background-color: #755f48;
+  border: none;
+  color: white;
+  padding: 15px 15px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -289,7 +338,18 @@ body {
   margin: 4px 2px;
   cursor: pointer;
 }
-
+.course button{
+  background-color: #ae9e8e;
+  border: none;
+  color: white;
+  padding: 15px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
 
 /**
  * Copyright 2015 Google Inc. All Rights Reserved.
